@@ -68,3 +68,29 @@ def search_project(request):
     return render(request,'search.html')
 
 
+@login_required(login_url='/accounts/login/')
+def project(request,project_id):
+    project = Project.objects.get(id=project_id)
+    rating = round(((project.design + project.usability + project.content)/3),2)
+    if request.method == 'POST':
+        form = VoteForm(request.POST)
+        if form.is_valid:
+            project.vote_submissions += 1
+            if project.design == 0:
+                project.design = int(request.POST['design'])
+            else:
+                project.design = (project.design + int(request.POST['design']))/2
+            if project.usability == 0:
+                project.usability = int(request.POST['usability'])
+            else:
+                project.usability = (project.design + int(request.POST['usability']))/2
+            if project.content == 0:
+                project.content = int(request.POST['content'])
+            else:
+                project.content = (project.design + int(request.POST['content']))/2
+            project.save()
+            return redirect(reverse('project',args=[project.id]))
+    else:
+        form = VoteForm()
+    return render(request,'project.html',{'form':form,'project':project,'rating':rating})
+
