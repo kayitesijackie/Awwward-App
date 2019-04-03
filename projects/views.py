@@ -40,3 +40,19 @@ def profile(request):
 
 
 
+@login_required(login_url='/accounts/login/')
+def submit_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST,request.FILES)
+
+        if form.is_valid():
+            project = Project(project_title=request.POST['project_title'],landing_page=request.FILES['landing_page'],project_description=request.POST['project_description'],live_site=request.POST['live_site'],user=request.user)
+            project.save()
+            return redirect(reverse('index'))
+    else:
+        form = NewProjectForm()
+
+    return render(request,'submit_project.html',{'form':form})
+
+
