@@ -13,3 +13,8 @@ from .serializer import ProfileSerializer,ProjectSerializer
 
 
 # Create your views here.
+def index(request):
+    projects = Project.objects.all()
+    return render(request,'index.html',{'projects':projects})
+
+
