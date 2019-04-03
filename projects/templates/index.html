@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+{{block.super}}<br><br>
+
+<div class="container" style="margin-top:30px">
+  <h1 class="text-center">My Projects</h1>
+  <div class="row">
+  <!-- Projects are displayed here -->
+  
+  <div class="col-sm-4">
+    {% for project in projects %}
+      <img class="landing-page" src="{{project.landing_page.url}}" alt="" height="400" width="400" style="border-radius:50px">
+      <div class="project-text">
+        <h3 class="text-center">{{project.project_title}}</h3>
+        <div class="d-flex justify-content-between">
+          <a href="{% url 'project' project.pk %}" class="btn">See More</a>
+          <a target="_blank" href="{{project.live_site}}" class="btn">Visit Site</a>
+        </div>
+        <ul class="d-flex justify-content-between">
+          <li>Design: {{project.design}}</li>
+          <li>Usability: {{project.usability}}</li>
+          <li>Content: {{project.content}}</li>
+        </ul>
+        <p class="text-center">By: <span>{{project.user.username}}</span></p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

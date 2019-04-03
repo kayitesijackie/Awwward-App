@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 100px">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card">
+        <h3 class="text-center">{{profile.user.username}}</h3>
+        <hr>
+        <div class="text-center card-text">
+          {% if profile.profile_pic %}
+          <img class="img-responsive" src="{{profile.profile_pic.url}}">
+          {% else %}
+          <p>You have no profile picture </p>
+          {% endif %}
+          {% if profile.bio %}
+          <p>{{profile.bio}}</p>
+          {% else %}
+          <p>You have no bio </p>
+          {% endif %}
+          <a href="{% url 'profile' %}" data-toggle="modal" data-target="#{{profile.id}}" class="btn btn-outline-info btn-md">Edit Profile</a>
+
+
+          <!-- Edit Profile Form -->
+          <div class="modal fade bd-example-modal-md" id="{{profile.id}}" tabindex="-1" role="dialog" aria-labelledby="profileTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center" id="profileTitle">Edit Your Profile</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+
+                    <div class="form-group">
+                      <input style="background-color:#1b95e0; color:#fff; border-radius:20px;" type="submit" class="btn btn-md d-flex mx-auto" value="Submit Vote">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Contact Details</h4>
+              <ul>
+                <li>{{profile.contact}}</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h4>Posted Projects</h4>
+              <ul>
+                {% for project in projects %}
+                <li>{{project.project_title}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+{% endblock %}

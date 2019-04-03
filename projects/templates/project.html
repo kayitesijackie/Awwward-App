@@ -1,0 +1,63 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<a href="{% url 'index' %}"style= "font-size: 30px; color:green">Home</a>
+
+<div class="container">
+  
+    <h3 class="text-center">{{project.project_title}}</h3>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <a href="{% url 'project' project.pk %}" data-toggle="modal" data-target="#{{project.id}}" class="btn">Vote</a>
+
+        <!-- Voting Modal -->
+        <div class="modal fade bd-example-modal-md" id="{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="projectTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="projectTitle">Vote</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="" action="" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {% bootstrap_form form %}
+
+                  <div class="form-group">
+                    <input type="submit" class="btn mx-auto" value="Submit Vote">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <a target="_blank" href="{{project.live_site}}" class="btn">Visit Site</a>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    {% autoescape on%}
+    <p class="text-center">{{project.project_description | safe}}</p>
+    {% endautoescape%}
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <ul class="d-flex justify-content-between">
+          <li>Design: {{project.design}}</li>
+          <li>Usability: {{project.usability}}</li>
+          <li>Content: {{project.content}}</li>
+        </ul>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <p class="text-center">By <span>{{project.user.username}}</span></p>
+    
+  </div>
+      
+</div>
+{% endblock %}

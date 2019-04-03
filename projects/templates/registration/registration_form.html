@@ -1,0 +1,32 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+        <p>Some information might be incorrect</p>
+      {% endif %}
+      <div style="padding:10px;" class="card">
+        <div class="card-title">
+            <img src="https://upqode.com/wp-content/uploads/2018/08/awwwards.svg" alt="" height=200px width=500px>
+          
+        </div>
+        <hr>
+        <div class="card-text">
+          <form class="" action="/accounts/register/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+              <input type="submit" class="btn mx-auto" value="Sign Up">
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+{% endblock %}
