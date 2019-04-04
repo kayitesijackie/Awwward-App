@@ -17,4 +17,4 @@ class VoteForm(ModelForm):
 class ProfileEditForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('profile_pic','bio')
+        fields = ('profile_pic','bio', 'contact')
