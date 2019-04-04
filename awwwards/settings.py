@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'rest_framework.authtoken',
     'rest_framework',
-    'url_or_relative_url_field',
+    
 ]
 
 MIDDLEWARE = [
