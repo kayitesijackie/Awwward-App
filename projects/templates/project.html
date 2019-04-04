@@ -1,15 +1,17 @@
-{% extends 'registration/base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<a href="{% url 'index' %}"style= "font-size: 30px; color:green">Home</a>
 
-<div class="container">
-  
-    <h3 class="text-center">{{project.project_title}}</h3>
+<div class="container-fluid" style="margin-top: 100px">
+    
     <div class="row">
       <div class="col-md-2"></div>
-      <div class="col-md-4">
-        <a href="{% url 'project' project.pk %}" data-toggle="modal" data-target="#{{project.id}}" class="btn">Vote</a>
+      <div class="col-md-8">
+          <div class="card">
+          <h3 class="text-center">{{project.project_title}}</h3>
+          <hr>
+          <div class="text-center card-text">
+            <a href="{% url 'project' project.pk %}" data-toggle="modal" data-target="#{{project.id}}" class="btn btn-outline-info btn-md">Vote</a>
 
         <!-- Voting Modal -->
         <div class="modal fade bd-example-modal-md" id="{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="projectTitle" aria-hidden="true">
@@ -34,13 +36,8 @@
             </div>
           </div>
         </div>
-
-      </div>
-      <div class="col-md-4">
-        <a target="_blank" href="{{project.live_site}}" class="btn">Visit Site</a>
-      </div>
+        <a target="_blank" href="{{project.live_site}}" class="btn btn-outline-info btn-md">Visit Site</a>
       <div class="col-md-2"></div>
-    </div>
     {% autoescape on%}
     <p class="text-center">{{project.project_description | safe}}</p>
     {% endautoescape%}
@@ -56,8 +53,9 @@
       <div class="col-md-3"></div>
     </div>
     <p class="text-center">By <span>{{project.user.username}}</span></p>
-    
+    </div>
+    </div>
+    </div>
+    </div>
   </div>
-      
-</div>
 {% endblock %}

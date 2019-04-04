@@ -40,6 +40,9 @@
 
         {% if user.is_authenticated %}
         <li class="nav-item">
+          <img src="{{profile_pic.url}}" alt="" style=" border-radius:50%; height: 40px; width: 40px">
+        </li>
+        <li> 
           <a href="{% url 'profile'%}" class="nav-link" style="color:#fff;">My Account</a>
         </li>
         <li class="nav-item">
