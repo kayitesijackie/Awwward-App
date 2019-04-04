@@ -21,7 +21,7 @@ def index(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     profile = UserProfile.objects.filter(user = request.user).first()
-    projects = Project.objects.filter(user=profile.user).all()
+    # projects = Project.objects.filter(user=profile.user).all()
 
     if request.method == 'POST':
         form = ProfileEditForm(request.POST,instance=profile,files=request.FILES)
@@ -33,7 +33,7 @@ def profile(request):
 
     context = {
         'profile':profile,
-        'projects':projects,
+        # 'projects':projects,
         'form':form,
     }
     return render(request,'profile.html',context)
@@ -71,7 +71,6 @@ def search_project(request):
 @login_required(login_url='/accounts/login/')
 def project(request,project_id):
     project = Project.objects.get(id=project_id)
-    rating = round(((project.design + project.usability + project.content)/3),2)
     if request.method == 'POST':
         form = VoteForm(request.POST)
         if form.is_valid:
@@ -92,7 +91,7 @@ def project(request,project_id):
             return redirect(reverse('project',args=[project.id]))
     else:
         form = VoteForm()
-    return render(request,'project.html',{'form':form,'project':project,'rating':rating})
+    return render(request,'project.html',{'form':form,'project':project})
 
 class ProfileList(APIView):
     def get(self,request,format=None):
