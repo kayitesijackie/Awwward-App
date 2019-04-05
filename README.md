@@ -65,7 +65,7 @@ To run this program
 ## Prerequisites
 You need the following to work on the project:
 
-`-Python version 3.6`
+`-Python version 3.7`
 
 `-Django 2.0`
 
