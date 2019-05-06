@@ -85,5 +85,5 @@ https://awwwards-app.herokuapp.com
 ## License
 MIT License
 
-Copyright (c) 2018 *Jackie Kayitesi*
+Copyright (c) 2019 *Jackie Kayitesi*
 
