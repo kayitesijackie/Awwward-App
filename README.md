@@ -1,11 +1,11 @@
 # Awwwards
 
-#### A application that allows a user to post a project he/she has created and get it reviewed by his/her peers.
+#### An application that allows a user to post a project he/she has created and get it reviewed by his/her peers.
 
 #### By **Jackie Kayitesi**
 
 ## Description
-A application that allows a user to post a project he/she has created and get it reviewed by his/her peers.
+An application that allows a user to post a project he/she has created and get it reviewed by his/her peers.
 
 ## Behavior Driven Development
 * The program should navigate to the index page on load:
